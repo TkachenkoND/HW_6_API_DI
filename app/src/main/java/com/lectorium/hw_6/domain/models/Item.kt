@@ -9,6 +9,6 @@ data class Item(
     val id: Int,
     @Json(name = "title")
     val title: String,
-    @Json(name = "thumbnailUrl")
-    val url: String
+    @Json(name = "url")
+    val url: String,
 )

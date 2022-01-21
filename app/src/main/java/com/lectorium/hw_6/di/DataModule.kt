@@ -2,6 +2,7 @@ package com.lectorium.hw_6.di
 
 import com.lectorium.hw_6.data.repository_impl.ItemListRepositoryImpl
 import com.lectorium.hw_6.data.services.ItemListServices
+import com.lectorium.hw_6.domain.repository.ItemListRepository
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
@@ -16,7 +17,6 @@ const val OK_HTTP_TIMEOUT = 40L
 
 val networkModule = module {
     factory { provideOkHttpClient() }
-    factory { provideItemListApi(get()) }
     factory { provideItemListApi(get()) }
     single { provideRetrofit(get()) }
 }
@@ -51,5 +51,5 @@ fun provideItemListApi(retrofit: Retrofit): ItemListServices = retrofit.create(
     ItemListServices::class.java)
 
 val dataModule = module {
-    single { ItemListRepositoryImpl(get()) }
+    single<ItemListRepository>{ ItemListRepositoryImpl(get()) }
 }

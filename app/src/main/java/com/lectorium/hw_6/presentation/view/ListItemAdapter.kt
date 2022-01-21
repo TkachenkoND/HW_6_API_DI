@@ -19,23 +19,22 @@ class ListItemAdapter : ListAdapter<Item, ListItemAdapter.ItemViewHolder>(DiffCa
         return ItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ListItemAdapter.ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class ItemViewHolder(val binding: RecyclerViewItemBinding) :
+    class ItemViewHolder(private val binding: RecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Item) {
             with(binding) {
                 Glide.with(imgItem.context)
                     .load(item.url)
-                    .error(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_not_image)
                     .circleCrop()
                     .into(imgItem)
 
                 titleItem.text = item.title
-
             }
         }
     }

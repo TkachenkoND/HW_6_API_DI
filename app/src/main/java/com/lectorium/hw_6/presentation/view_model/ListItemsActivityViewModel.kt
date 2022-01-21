@@ -15,11 +15,7 @@ class ListItemsActivityViewModel(private val loadListItemUseCase: LoadListItemUs
 
     fun loadItemList() {
         viewModelScope.launch {
-            try {
-                _itemList.value = loadListItemUseCase.loadItemList()
-            } catch (e: Exception) {
-                print(e)
-            }
+            _itemList.value = loadListItemUseCase.loadItemList()
         }
     }
 }
