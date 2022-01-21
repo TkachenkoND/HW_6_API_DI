@@ -24,13 +24,13 @@ class ListItemsActivity : AppCompatActivity() {
         initObserver()
     }
 
-    fun initAdapter(){
+    private fun initAdapter(){
         binding.recyclerViewContainerItem.apply {
             adapter = listItemAdapter
         }
     }
 
-    fun initObserver(){
+    private fun initObserver(){
         viewModel.itemList.observe(this, {
             listItemAdapter.submitList(it)
         })
