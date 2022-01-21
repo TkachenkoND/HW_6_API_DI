@@ -8,7 +8,7 @@ import com.lectorium.hw_6.domain.models.Item
 import com.lectorium.hw_6.domain.usecase.LoadListItemUseCase
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val loadListItemUseCase: LoadListItemUseCase): ViewModel() {
+class ListItemsActivityViewModel(private val loadListItemUseCase: LoadListItemUseCase): ViewModel() {
     private val _itemList = MutableLiveData<List<Item>>()
     val itemList: LiveData<List<Item>> = _itemList
 

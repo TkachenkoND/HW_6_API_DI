@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HW_6_API_DI">
         <activity
-            android:name=".presentation.view.MainActivity"
+            android:name=".presentation.view.ListItemsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
