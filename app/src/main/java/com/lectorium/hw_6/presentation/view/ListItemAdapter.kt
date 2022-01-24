@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
 import com.lectorium.hw_6.R
 import com.lectorium.hw_6.databinding.RecyclerViewItemBinding
 import com.lectorium.hw_6.domain.models.Item
@@ -27,11 +29,17 @@ class ListItemAdapter : ListAdapter<Item, ListItemAdapter.ItemViewHolder>(DiffCa
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Item) {
+
+            val url = GlideUrl(
+                item.url, LazyHeaders.Builder()
+                    .addHeader("User-Agent", "Android")
+                    .build()
+            )
+
             with(binding) {
                 Glide.with(imgItem.context)
-                    .load(item.url)
+                    .load(url)
                     .error(R.drawable.ic_not_image)
-                    .circleCrop()
                     .into(imgItem)
 
                 titleItem.text = item.title
