@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import com.lectorium.hw_6.databinding.FragmentMainBinding
 import com.lectorium.hw_6.presentation.view_model.ListItemsActivityViewModel
@@ -33,6 +34,7 @@ class FragmentMain : Fragment() {
 
         initAdapter()
         initObserver()
+
     }
 
     private fun initAdapter() {
@@ -44,6 +46,10 @@ class FragmentMain : Fragment() {
     private fun initObserver() {
         viewModel.itemList.observe(viewLifecycleOwner, {
             listItemAdapter.submitList(it)
+
+            binding.recyclerViewContainerItem.visibility = ProgressBar.VISIBLE
+            binding.progressBar.visibility = ProgressBar.GONE
+
         })
     }
 
@@ -51,6 +57,5 @@ class FragmentMain : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 
 }
