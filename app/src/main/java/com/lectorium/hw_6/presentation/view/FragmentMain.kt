@@ -44,13 +44,13 @@ class FragmentMain : Fragment() {
     }
 
     private fun initObserver() {
-        viewModel.itemList.observe(viewLifecycleOwner, {
+        viewModel.itemList.observe(viewLifecycleOwner) {
             listItemAdapter.submitList(it)
 
             binding.recyclerViewContainerItem.visibility = ProgressBar.VISIBLE
             binding.progressBar.visibility = ProgressBar.GONE
 
-        })
+        }
     }
 
     override fun onDestroyView() {
