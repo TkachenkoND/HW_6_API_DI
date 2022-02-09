@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.lectorium.hw_6.databinding.FragmentMainBinding
 import com.lectorium.hw_6.presentation.view_model.ListItemsActivityViewModel
@@ -33,7 +34,8 @@ class FragmentMain : Fragment() {
         viewModel.loadItemList()
 
         initAdapter()
-        initObserver()
+        initObserverLoading()
+        initObserverItemList()
 
     }
 
@@ -43,14 +45,24 @@ class FragmentMain : Fragment() {
         }
     }
 
-    private fun initObserver() {
-        viewModel.itemList.observe(viewLifecycleOwner, {
+    private fun initObserverLoading(){
+        binding.shimmer.startShimmer()
+
+        viewModel.isLoading.observe(viewLifecycleOwner){
+            if (it){
+                binding.shimmer.stopShimmer()
+                binding.shimmer.visibility = ProgressBar.GONE
+                binding.recyclerViewContainerItem.visibility = ProgressBar.VISIBLE
+            }
+            else
+                Toast.makeText(activity, "Sorry, an error occurred (", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun initObserverItemList() {
+        viewModel.itemList.observe(viewLifecycleOwner) {
             listItemAdapter.submitList(it)
-
-            binding.recyclerViewContainerItem.visibility = ProgressBar.VISIBLE
-            binding.progressBar.visibility = ProgressBar.GONE
-
-        })
+        }
     }
 
     override fun onDestroyView() {
